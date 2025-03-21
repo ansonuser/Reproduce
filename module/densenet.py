@@ -7,7 +7,7 @@ class BNConvRe(nn.Module):
         self.conv1 = nn.Conv2d(in_channels, out_channels, size, stride)
         self.relu1 = nn.ReLU()
         self.bn1 = nn.BatchNorm2d(out_channels)
-    def forward(self, x)
+    def forward(self, x):
         return self.bn1(self.relu1(self.conv1(x)))
 
 
