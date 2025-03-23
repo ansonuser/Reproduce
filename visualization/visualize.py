@@ -6,6 +6,8 @@ os.environ["PATH"] += os.pathsep + r"D:\Tools\windows_10_cmake_Release_Graphviz-
 from module.densenet import Densenet
 import torch
 from torchviz import make_dot
+from tensorboard.backend.event_processing import event_accumulator
+
 
 saved_folder = "densenet_traced"
 
@@ -24,6 +26,11 @@ def tensorboard_save(model, dummy_input, saved_folder):
     writer.add_graph(traced, dummy_input)
     writer.close()
 
+def check_saved_graph(saved_folder):
+    ea = event_accumulator.EventAccumulator(f"runs/{saved_folder}")  # or your folder path
+    ea.Reload()
+    print("Available tags:")
+    print(ea.Tags())
 
 if __name__ == "__main__":
     tensorboard_save(model, dummy_input, saved_folder)
